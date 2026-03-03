@@ -80,6 +80,17 @@ ludoia/
 - **WhatsApp:** Edita la URL en `app/components/FloatingWhatsapp.tsx` y reemplaza `57XXXXXXXXXX` por el número real.
 - **Rutas de agendar:** La página usa `/agendar-llamada`; puedes crear esa ruta e integrar Calendly o similar.
 
+## Despliegue en DigitalOcean (ludoia.com)
+
+Para desplegar en un Droplet y servir en **ludoia.com**, sigue la guía:
+
+- **[DEPLOY.md](./DEPLOY.md)** — Conexión al Droplet, dominio, Nginx, SSL y PM2.
+
+Después de configurar el servidor una vez, puedes actualizar la página con:
+
+- **PowerShell:** `.\deploy-remote.ps1` (edita la IP en el script o usa `$env:DEPLOY_SERVER`)
+- **Bash / Git Bash:** `./deploy-remote.sh`
+
 ## Licencia
 
 © 2026 Ludoia. Todos los derechos reservados.
