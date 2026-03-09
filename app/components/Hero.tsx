@@ -34,7 +34,7 @@ export function Hero() {
             </a>
             <DialCallButton
               label="Agendar una llamada"
-              icon={ArrowRight}
+              icon={<ArrowRight className="h-5 w-5" />}
               className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-green-500 px-6 py-3 text-base font-semibold text-white shadow-sm transition hover:bg-green-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-80 sm:w-auto"
             />
           </div>

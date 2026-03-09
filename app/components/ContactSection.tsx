@@ -40,7 +40,7 @@ export function ContactSection() {
               </div>
               <DialCallButton
                 label="Agendar Llamada Estratégica"
-                icon={PhoneOutgoing}
+                icon={<PhoneOutgoing className="h-5 w-5" />}
                 className="mt-1 inline-flex w-full items-center justify-center gap-2 rounded-full bg-green-500 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-green-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-80"
               />
             </div>

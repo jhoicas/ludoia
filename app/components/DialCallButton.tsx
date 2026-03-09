@@ -1,17 +1,17 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 
 type DialCallButtonProps = {
   label: string;
   className: string;
-  icon?: React.ComponentType<React.SVGProps<SVGSVGElement>>;
+  icon?: ReactNode;
 };
 
 export function DialCallButton({
   label,
   className,
-  icon: Icon,
+  icon,
 }: DialCallButtonProps) {
   const [loading, setLoading] = useState(false);
 
@@ -40,9 +40,10 @@ export function DialCallButton({
       disabled={loading}
       className={className}
     >
-      {Icon ? <Icon className="h-5 w-5" /> : null}
+      {icon}
       <span>{loading ? "Agendando..." : label}</span>
     </button>
   );
 }
+
 
