@@ -34,6 +34,7 @@ function Footer() {
         <div className="space-y-1">
           <p className="font-semibold text-slate-700">Ludoia</p>
           <p>Software empresarial en la nube · ERP en Colombia.</p>
+          <p>sales@ludoia.com · +57 (318) 383 84 17</p>
           <p>© 2026 Ludoia. Todos los derechos reservados.</p>
         </div>
         <div className="flex flex-wrap gap-4">

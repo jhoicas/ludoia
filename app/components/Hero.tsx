@@ -1,4 +1,5 @@
 import { ArrowRight, PlayCircle } from "lucide-react";
+import { DialCallButton } from "./DialCallButton";
 
 export function Hero() {
   return (
@@ -23,19 +24,19 @@ export function Hero() {
           </p>
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
             <a
-              href="#demo-erp"
+              href="https://naturerp.ludoia.com/"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-blue-600 px-6 py-3 text-base font-semibold text-white shadow-sm transition hover:bg-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 sm:w-auto"
             >
               <PlayCircle className="h-5 w-5" />
               Ver Demo ERP
             </a>
-            <a
-              href="#agendar-llamada"
-              className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-green-500 px-6 py-3 text-base font-semibold text-white shadow-sm transition hover:bg-green-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-2 sm:w-auto"
-            >
-              <ArrowRight className="h-5 w-5" />
-              Agendar una llamada
-            </a>
+            <DialCallButton
+              label="Agendar una llamada"
+              icon={ArrowRight}
+              className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-green-500 px-6 py-3 text-base font-semibold text-white shadow-sm transition hover:bg-green-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-80 sm:w-auto"
+            />
           </div>
           <p className="text-xs text-slate-500 sm:text-sm">
             Incluimos módulos de facturación electrónica para Colombia, software

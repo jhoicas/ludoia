@@ -72,10 +72,16 @@ export function ProductSection() {
                 Indicadores clave para decisiones rápidas y basadas en datos.
               </Card>
             </div>
-            <p className="text-xs text-slate-500">
-              Más que un ERP en Colombia, Ludoia es una plataforma continua de
-              mejora y control de tu operación.
-            </p>
+            <div className="space-y-1.5">
+              <p className="text-xs text-slate-500">
+                Más que un ERP en Colombia, Ludoia es una plataforma continua de
+                mejora y control de tu operación.
+              </p>
+              <p className="text-[11px] text-slate-500">
+                Las credenciales de acceso a la demo se entregan de forma
+                segura a través de WhatsApp una vez solicites la demostración.
+              </p>
+            </div>
           </div>
         </div>
       </div>

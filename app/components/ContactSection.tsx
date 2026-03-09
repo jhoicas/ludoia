@@ -1,4 +1,5 @@
-import { CalendarRange, Mail, PhoneCall } from "lucide-react";
+import { CalendarRange, Mail, PhoneCall, PhoneOutgoing } from "lucide-react";
+import { DialCallButton } from "./DialCallButton";
 
 export function ContactSection() {
   return (
@@ -37,12 +38,11 @@ export function ContactSection() {
                   </p>
                 </div>
               </div>
-              <a
-                href="/agendar-llamada"
-                className="mt-1 inline-flex w-full items-center justify-center rounded-full bg-green-500 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-green-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-2"
-              >
-                Agendar Llamada Estratégica
-              </a>
+              <DialCallButton
+                label="Agendar Llamada Estratégica"
+                icon={PhoneOutgoing}
+                className="mt-1 inline-flex w-full items-center justify-center gap-2 rounded-full bg-green-500 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-green-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-80"
+              />
             </div>
           </div>
           <div className="space-y-4">
@@ -53,11 +53,11 @@ export function ContactSection() {
               <div className="space-y-2 text-xs text-slate-600">
                 <p className="flex items-center gap-2">
                   <Mail className="h-4 w-4 text-blue-600" />
-                  <span>contacto@ludoia.com</span>
+                  <span>sales@ludoia.com</span>
                 </p>
                 <p className="flex items-center gap-2">
                   <PhoneCall className="h-4 w-4 text-blue-600" />
-                  <span>+57 (000) 000 00 00</span>
+                  <span>+57 (318) 383 84 17</span>
                 </p>
                 <p>
                   Atendemos empresas B2B que buscan centralizar{" "}

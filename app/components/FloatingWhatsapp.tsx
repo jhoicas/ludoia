@@ -1,7 +1,7 @@
 import { MessageCircle } from "lucide-react";
 
 const WHATSAPP_URL =
-  "https://wa.me/57XXXXXXXXXX?text=Hola,%20quiero%20informaci%C3%B3n%20sobre%20el%20ERP%20Ludoia.";
+  "https://wa.me/573183838417?text=Hola,%20quiero%20informaci%C3%B3n%20sobre%20el%20ERP%20Ludoia.";
 
 export function FloatingWhatsapp() {
   return (
@@ -16,4 +16,5 @@ export function FloatingWhatsapp() {
     </a>
   );
 }
+
 
