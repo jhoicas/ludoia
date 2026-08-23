@@ -2,9 +2,14 @@ import { render, screen } from '@testing-library/react';
 import { Hero } from '@/app/components/Hero';
 
 describe('Hero Component', () => {
-  it('should render the main CTAs', () => {
+  it('should render the main title', () => {
     render(<Hero />);
-    const cta = screen.getAllByRole('link', { name: /demo erp|agendar llamada/i });
-    expect(cta.length).toBeGreaterThan(0);
+    const heading = screen.getByRole('heading', { level: 1 });
+    expect(heading).toHaveTextContent(/Software a la Medida/i);
+  });
+
+  it('should render CTA buttons', () => {
+    render(<Hero />);
+    expect(screen.getByText('Cotizar Proyecto')).toBeInTheDocument();
   });
 });

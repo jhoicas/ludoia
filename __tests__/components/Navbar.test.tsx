@@ -1,10 +1,14 @@
 import { render, screen } from '@testing-library/react';
 import { Navbar } from '@/app/components/Navbar';
 
+// Mock next-themes to prevent errors in tests
+jest.mock('next-themes', () => ({
+  useTheme: () => ({ theme: 'light', setTheme: jest.fn() })
+}));
+
 describe('Navbar Component', () => {
-  it('should render the Ludoia logo/brand', () => {
+  it('should render the logo text', () => {
     render(<Navbar />);
-    const brandElements = screen.getAllByText(/Ludoia/i);
-    expect(brandElements.length).toBeGreaterThan(0);
+    expect(screen.getByText('Ludoia')).toBeInTheDocument();
   });
 });
