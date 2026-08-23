@@ -7,6 +7,9 @@ import { CustomSoftwareSection } from "./components/CustomSoftware";
 import { WhyChooseUsSection } from "./components/WhyChooseUs";
 import { ContactSection } from "./components/ContactSection";
 import { FloatingWhatsapp } from "./components/FloatingWhatsapp";
+import { SaaSGrid } from "./components/SaaSGrid";
+import { QuoteModule } from "./components/QuoteModule";
+import { Chatbot } from "./components/Chatbot";
 
 export default function HomePage() {
   return (
@@ -16,13 +19,16 @@ export default function HomePage() {
         <Hero />
         <AboutSection />
         <ProductSection />
+        <SaaSGrid />
         <ModulesSection />
         <CustomSoftwareSection />
+        <QuoteModule />
         <WhyChooseUsSection />
         <ContactSection />
       </main>
       <Footer />
       <FloatingWhatsapp />
+      <Chatbot />
     </div>
   );
 }
