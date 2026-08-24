@@ -14,6 +14,8 @@ global.fetch = jest.fn(() =>
     ok: true,
     json: () => Promise.resolve({
       estimate: {
+        reasoning: "Test reasoning",
+        architecture: "Test architecture",
         estimatedPriceUSD: 10000,
         estimatedPriceCOP: 40000000,
         estimatedTimeWeeks: 8,

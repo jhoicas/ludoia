@@ -5,6 +5,8 @@ import { useTranslation } from "../hooks/useTranslation";
 import { Calculator, Clock, Code, Shield, MessageCircle } from "lucide-react";
 
 type EstimateResult = {
+  reasoning?: string;
+  architecture?: string;
   estimatedPriceUSD: number;
   estimatedPriceCOP: number;
   estimatedTimeWeeks: number;
@@ -120,6 +122,21 @@ export function QuoteModule() {
               </h3>
               
               <div className="space-y-6">
+                
+                {estimate.reasoning && (
+                  <div className="bg-indigo-50 dark:bg-indigo-900/20 p-4 rounded-xl border border-indigo-100 dark:border-indigo-800/30">
+                    <p className="text-sm text-indigo-900 dark:text-indigo-200 leading-relaxed italic">
+                      "{estimate.reasoning}"
+                    </p>
+                    {estimate.architecture && (
+                      <div className="mt-3 flex items-center gap-2">
+                        <Code className="w-4 h-4 text-indigo-500" />
+                        <span className="text-xs font-semibold text-indigo-700 dark:text-indigo-300">Suggested Stack: {estimate.architecture}</span>
+                      </div>
+                    )}
+                  </div>
+                )}
+
                 <div>
                   <p className="text-sm text-slate-500 dark:text-slate-400 mb-1">Estimated Investment</p>
                   <p className="text-2xl font-bold text-blue-600 dark:text-blue-400">${estimate.estimatedPriceUSD.toLocaleString()} USD</p>

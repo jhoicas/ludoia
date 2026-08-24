@@ -14,9 +14,11 @@ Debes estimar el costo y el tiempo de desarrollo.
 
 Tu respuesta DEBE ser ÚNICAMENTE un JSON válido con esta estructura exacta (calculando los valores numéricos basándote en la complejidad):
 {
-  "estimatedPriceUSD": 12000,
-  "estimatedPriceCOP": 48000000,
-  "estimatedTimeWeeks": 8,
+  "reasoning": "Se detectó un sitio informativo simple tipo blog, por lo que se requiere únicamente un maquetado estático con gestor de contenidos básico.",
+  "architecture": "Next.js + Tailwind CSS + CMS Headless",
+  "estimatedPriceUSD": 2500,
+  "estimatedPriceCOP": 10000000,
+  "estimatedTimeWeeks": 2,
   "projectedDate": "2026-11-01",
   "businessModels": {
     "saas": "Licenciamiento mensual/anual con infraestructura gestionada.",
@@ -25,12 +27,13 @@ Tu respuesta DEBE ser ÚNICAMENTE un JSON válido con esta estructura exacta (ca
   "disclaimer": "Esta estimación es un borrador preliminar. Se requiere una sesión de descubrimiento para un alcance definitivo."
 }
 
-Reglas de Escala de Precios (Estricto):
-- Proyecto Básico / MVP (apps simples, landing, webs corporativas): $8,000 USD - $15,000 USD (32,000,000 - 60,000,000 COP) | 4 - 8 Semanas.
-- Proyecto Complejidad Media (integraciones, CRM, e-commerce, paneles a medida): $15,000 USD - $35,000 USD (60,000,000 - 140,000,000 COP) | 8 - 14 Semanas.
-- Proyecto Enterprise / Carga Masiva (millón de visitas, IA, microservicios, móvil, alta disponibilidad, pagos concurrentes): $35,000 USD - $85,000+ USD (140,000,000 - 340,000,000+ COP) | 16 - 28+ Semanas.
+Reglas de Escala de Precios (Estricto - 4 Niveles):
+- Sitio Básico / Blog / Landing Page: $1,500 - $3,500 USD (1 - 3 Semanas). Keywords: blog, landing, página informativa, mostrar información, sitio sencillo, sitio web. IMPORTANTE: Si incluye "blog" o "mostrar información", el precio NUNCA supere los $3,000 USD.
+- MVP / Sistema Web Básico: $4,500 - $10,000 USD (3 - 6 Semanas). Keywords: autenticación, login, crud, roles, catálogo, formulario de registro.
+- Plataforma / Complejidad Media: $11,000 - $25,000 USD (6 - 12 Semanas). Keywords: e-commerce, tienda, pasarela de pagos, crm, dashboard, panel de administración.
+- Enterprise / Alta Escala: $28,000 - $70,000+ USD (12 - 24+ Semanas). Keywords: concurrencia, 1 millón, visitas, alta disponibilidad, microservicios, IA integrada.
 
-Multiplica de forma escalonada el costo y tiempo si detectas palabras clave de alta escala (concurrencia, millón, IA, microservicios, pagos).
+Explica tu evaluación técnica detallada en el campo "reasoning" y recomienda el stack en "architecture".
 No incluyas texto markdown, solo JSON.
 `;
 
@@ -51,29 +54,54 @@ export async function POST(req: Request) {
     const getFallbackEstimate = (description: string) => {
       const descLower = description.toLowerCase();
       
-      const enterpriseKeywords = ["concurrencia", "millón", "millon", "visitas", "usuarios", "escala", "sistemas de pago", "pagos", "alta disponibilidad", "móvil", "movil", "ia", "inteligencia artificial", "microservicios"];
-      const mediumKeywords = ["integración", "integracion", "crm", "e-commerce", "ecommerce", "panel", "dashboard", "roles", "personalizado"];
+      const enterpriseKeywords = ["concurrencia", "1 millón", "1 millon", "millón", "visitas", "alta disponibilidad", "microservicios", "ia integrada"];
+      const mediumKeywords = ["e-commerce", "ecommerce", "tienda", "pasarela", "pagos", "crm", "dashboard", "panel"];
+      const mvpKeywords = ["autenticación", "autenticacion", "login", "crud", "roles", "catálogo", "catalogo", "registro"];
+      const basicKeywords = ["blog", "landing", "informativa", "mostrar información", "sencillo", "sitio web"];
       
       let isEnterprise = enterpriseKeywords.some(kw => descLower.includes(kw));
-      let isMedium = mediumKeywords.some(kw => descLower.includes(kw)) || description.length > 200;
+      let isMedium = mediumKeywords.some(kw => descLower.includes(kw));
+      let isMvp = mvpKeywords.some(kw => descLower.includes(kw));
+      let isBasic = basicKeywords.some(kw => descLower.includes(kw));
       
-      let priceUSD, priceCOP, weeks;
+      let priceUSD, priceCOP, weeks, reasoning, architecture;
 
       if (isEnterprise) {
-        priceUSD = 45000;
-        priceCOP = 180000000;
-        weeks = 20;
+        priceUSD = 40000;
+        priceCOP = 160000000;
+        weeks = 18;
+        reasoning = "Se identificó un requerimiento de altísima escala y criticidad técnica con necesidad de manejo masivo y alta disponibilidad.";
+        architecture = "Kubernetes + Microservicios (Go/Node.js) + PostgreSQL + Redis + CDN global";
       } else if (isMedium) {
-        priceUSD = 22000;
-        priceCOP = 88000000;
+        priceUSD = 18000;
+        priceCOP = 72000000;
         weeks = 10;
+        reasoning = "Se identificó una plataforma de complejidad media que requiere integraciones de negocio core, como comercio electrónico o gestión de usuarios avanzada.";
+        architecture = "Next.js + Node.js/NestJS + PostgreSQL + Stripe/MercadoPago";
+      } else if (isMvp || description.length > 200) {
+        priceUSD = 7500;
+        priceCOP = 30000000;
+        weeks = 5;
+        reasoning = "Se detectó un sistema MVP para validar funciones esenciales de negocio con usuarios reales (registro, base de datos relacional).";
+        architecture = "Next.js + Tailwind CSS + Supabase/Firebase";
       } else {
-        priceUSD = 10000;
-        priceCOP = 40000000;
-        weeks = 6;
+        priceUSD = 2500;
+        priceCOP = 10000000;
+        weeks = 2;
+        reasoning = "Se detectó un requerimiento de carácter informativo o de presencia web rápida sin lógica transaccional compleja.";
+        architecture = "Next.js + Tailwind CSS + CMS Headless (Sanity/Strapi)";
+      }
+
+      if ((descLower.includes("blog") || descLower.includes("mostrar información") || descLower.includes("mostrar informacion")) && priceUSD > 3000) {
+        priceUSD = 2900;
+        priceCOP = 11600000;
+        weeks = 2;
+        reasoning = "El requerimiento parece informativo y se detectaron palabras clave de contenido estático o blog, lo que ajusta los tiempos y costos a una escala sencilla.";
       }
 
       return {
+        reasoning,
+        architecture,
         estimatedPriceUSD: priceUSD,
         estimatedPriceCOP: priceCOP,
         estimatedTimeWeeks: weeks,

@@ -8,7 +8,7 @@ jest.mock('@anthropic-ai/sdk', () => {
   return jest.fn().mockImplementation(() => ({
     messages: {
       create: jest.fn().mockResolvedValue({
-        content: [{ type: 'text', text: '{"estimatedPriceUSD": 12000, "estimatedPriceCOP": 48000000, "estimatedTimeWeeks": 8, "projectedDate": "2026-11-01", "businessModels": {"saas": "SaaS model", "fullOwnership": "Full ownership"}, "disclaimer": "Disclaimer"}' }]
+        content: [{ type: 'text', text: '{"reasoning": "Reasoning text", "architecture": "Tech Stack", "estimatedPriceUSD": 12000, "estimatedPriceCOP": 48000000, "estimatedTimeWeeks": 8, "projectedDate": "2026-11-01", "businessModels": {"saas": "SaaS model", "fullOwnership": "Full ownership"}, "disclaimer": "Disclaimer"}' }]
       })
     }
   }));
