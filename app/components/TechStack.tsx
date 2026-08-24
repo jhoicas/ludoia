@@ -11,20 +11,20 @@ export function TechStack() {
       title: t("tech.cat.frontend"),
       icon: <Layout className="h-6 w-6 text-blue-500" />,
       items: [
-        { name: "React", src: "https://cdn.simpleicons.org/react/61DAFB" },
-        { name: "Next.js", src: "https://cdn.simpleicons.org/nextdotjs/black" },
-        { name: "Vue", src: "https://cdn.simpleicons.org/vuedotjs/4FC08D" },
-        { name: "Angular", src: "https://cdn.simpleicons.org/angular/DD0031" }
+        { name: "React", src: "/icons/tech/react.svg" },
+        { name: "Next.js", src: "/icons/tech/nextjs.svg" },
+        { name: "Vue", src: "/icons/tech/vue.svg" },
+        { name: "Angular", src: "/icons/tech/angular.svg" }
       ]
     },
     {
       title: t("tech.cat.backend"),
       icon: <Server className="h-6 w-6 text-emerald-500" />,
       items: [
-        { name: ".NET", src: "https://cdn.simpleicons.org/dotnet/512BD4" },
-        { name: "Golang", src: "https://cdn.simpleicons.org/go/00ADD8" },
-        { name: "Python", src: "https://cdn.simpleicons.org/python/3776AB" },
-        { name: "Node.js", src: "https://cdn.simpleicons.org/nodedotjs/339933" }
+        { name: ".NET", src: "/icons/tech/dotnet.svg" },
+        { name: "Golang", src: "/icons/tech/golang.svg" },
+        { name: "Python", src: "/icons/tech/python.svg" },
+        { name: "Node.js", src: "/icons/tech/nodejs.svg" }
       ]
     },
     {
@@ -33,23 +33,22 @@ export function TechStack() {
       items: [
         { name: "AWS", icon: <Cloud className="w-5 h-5 text-slate-700 dark:text-slate-200" /> },
         { name: "Azure", icon: <Box className="w-5 h-5 text-blue-500" /> },
-        { name: "Docker", src: "https://cdn.simpleicons.org/docker/2496ED" },
-        { name: "Kubernetes", src: "https://cdn.simpleicons.org/kubernetes/326CE5" }
+        { name: "Docker", src: "/icons/tech/docker.svg" },
+        { name: "Kubernetes", src: "/icons/tech/kubernetes.svg" }
       ]
     },
     {
       title: t("tech.cat.data"),
       icon: <Database className="h-6 w-6 text-orange-500" />,
-      items: [
-        { name: "PostgreSQL", src: "https://cdn.simpleicons.org/postgresql/4169E1" },
-        { name: "SQL Server", src: "https://cdn.simpleicons.org/microsoftsqlserver/CC2927" },
-        { name: "MongoDB", src: "https://cdn.simpleicons.org/mongodb/47A248" },
+        { name: "PostgreSQL", src: "/icons/tech/postgresql.svg" },
+        { name: "SQL Server", src: "/icons/tech/sql-server.svg" },
+        { name: "MongoDB", src: "/icons/tech/mongodb.svg" },
         { name: "Azure Cosmos DB", icon: <Database className="w-5 h-5 text-blue-500" /> },
-        { name: "IBM DB2", src: "https://cdn.simpleicons.org/ibm/052FAD" },
-        { name: "Redis", src: "https://cdn.simpleicons.org/redis/DC382D" },
+        { name: "IBM DB2", src: "/icons/tech/ibm-db2.svg" },
+        { name: "Redis", src: "/icons/tech/redis.svg" },
         { name: "OpenAI", icon: <BrainCircuit className="w-5 h-5 text-emerald-600 dark:text-emerald-400" /> },
-        { name: "Claude", src: "https://cdn.simpleicons.org/anthropic/D97757" },
-        { name: "Cursor", src: "https://cdn.simpleicons.org/cursor/000000" }
+        { name: "Claude", src: "/icons/tech/claude.svg" },
+        { name: "Cursor", src: "/icons/tech/cursor.svg" }
       ]
     }
   ];
@@ -85,7 +84,9 @@ export function TechStack() {
                       <>
                         <img 
                           src={item.src} 
-                          alt={`${item.name} logo`} 
+                          alt={`${item.name} logo`}
+                          width={20}
+                          height={20}
                           className="w-5 h-5 dark:bg-white dark:rounded-sm dark:p-0.5 object-contain" 
                           onError={(e) => {
                             e.currentTarget.onerror = null;
@@ -93,8 +94,8 @@ export function TechStack() {
                             e.currentTarget.nextElementSibling?.classList.remove('hidden');
                           }}
                         />
-                        <div className="hidden w-5 h-5 flex items-center justify-center rounded bg-slate-100 dark:bg-slate-700 text-slate-400 text-[10px] font-bold">
-                          {item.name.charAt(0)}
+                        <div className="hidden w-5 h-5 flex items-center justify-center text-slate-400">
+                          <Cpu className="w-5 h-5" />
                         </div>
                       </>
                     )}
