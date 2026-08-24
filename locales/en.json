@@ -24,6 +24,7 @@
   "quote.button": "Generate Estimate",
   "quote.whatsapp.cta": "Talk with a Specialist on WhatsApp",
   "quote.whatsapp.msg": "Hello Ludoia, I just generated an estimate for my project...",
-  "quote.disclaimer": "This is a preliminary estimate. For an exact technical breakdown, please contact our professional in charge via WhatsApp.",
+  "quote.disclaimer.note": "This information is a referential estimate based on hourly rate and projected time, it does not constitute a binding quote. The actual value may vary upwards or downwards depending on the definitive scope.",
+  "quote.disclaimer.fee": "To obtain a formal and detailed technical quote with architectural breakdown performed by a Senior Engineer, please contact us on WhatsApp. The preparation of the formal technical proposal has a cost of $60 USD (deductible from the project total if you decide to hire us).",
   "quote.rateLimitExceeded": "Automatic queries are temporarily limited to 5 attempts for system security and protection. If you need further details about your project, please contact us directly via WhatsApp."
 }

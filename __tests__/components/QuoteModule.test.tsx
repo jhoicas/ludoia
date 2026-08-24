@@ -63,7 +63,7 @@ describe('QuoteModule Component', () => {
     await waitFor(() => {
       expect(screen.getByText('AI Estimate Results')).toBeInTheDocument();
       expect(screen.getByText('$10,000 USD')).toBeInTheDocument();
-      expect(screen.getByText('8 Weeks')).toBeInTheDocument();
+      expect(screen.getByText('7 Weeks')).toBeInTheDocument();
     });
   });
 });

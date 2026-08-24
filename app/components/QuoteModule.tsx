@@ -25,6 +25,7 @@ export function QuoteModule() {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState("");
   const [estimate, setEstimate] = useState<EstimateResult | null>(null);
+  const [hours, setHours] = useState(0);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -47,6 +48,7 @@ export function QuoteModule() {
       if (!res.ok) throw new Error("Failed");
       const data = await res.json();
       setEstimate(data.estimate);
+      setHours(Math.round(data.estimate.estimatedPriceUSD / 40));
       setStatus("success");
     } catch (err) {
       setStatus("error");
@@ -137,10 +139,26 @@ export function QuoteModule() {
                   </div>
                 )}
 
-                <div>
-                  <p className="text-sm text-slate-500 dark:text-slate-400 mb-1">Estimated Investment</p>
-                  <p className="text-2xl font-bold text-blue-600 dark:text-blue-400">${estimate.estimatedPriceUSD.toLocaleString()} USD</p>
-                  <p className="text-sm font-medium text-slate-600 dark:text-slate-300">${estimate.estimatedPriceCOP.toLocaleString()} COP</p>
+                <div className="bg-white dark:bg-slate-800 p-4 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm">
+                  <div className="flex items-center justify-between mb-4">
+                    <p className="text-sm font-semibold text-slate-700 dark:text-slate-300">Estimated Hours</p>
+                    <div className="flex items-center gap-3 bg-slate-100 dark:bg-slate-900 rounded-lg p-1 border border-slate-200 dark:border-slate-700">
+                      <button 
+                        onClick={() => setHours(h => Math.max(10, h - 10))}
+                        className="w-8 h-8 flex items-center justify-center bg-white dark:bg-slate-800 rounded shadow-sm text-slate-600 dark:text-slate-400 hover:text-blue-600 font-bold"
+                      >-</button>
+                      <span className="w-12 text-center font-bold text-slate-900 dark:text-white">{hours}</span>
+                      <button 
+                        onClick={() => setHours(h => h + 10)}
+                        className="w-8 h-8 flex items-center justify-center bg-white dark:bg-slate-800 rounded shadow-sm text-slate-600 dark:text-slate-400 hover:text-blue-600 font-bold"
+                      >+</button>
+                    </div>
+                  </div>
+                  <div>
+                    <p className="text-sm text-slate-500 dark:text-slate-400 mb-1">Estimated Investment (at $40/hr)</p>
+                    <p className="text-2xl font-bold text-blue-600 dark:text-blue-400">${(hours * 40).toLocaleString()} USD</p>
+                    <p className="text-sm font-medium text-slate-600 dark:text-slate-300">${(hours * 40 * 4000).toLocaleString()} COP</p>
+                  </div>
                 </div>
 
                 <div className="grid grid-cols-2 gap-4">
@@ -148,13 +166,13 @@ export function QuoteModule() {
                     <div className="flex items-center gap-2 text-slate-500 dark:text-slate-400 mb-2">
                       <Clock className="w-4 h-4" /> <span className="text-xs font-semibold uppercase">Timeline</span>
                     </div>
-                    <p className="font-bold text-slate-900 dark:text-white">{estimate.estimatedTimeWeeks} Weeks</p>
+                    <p className="font-bold text-slate-900 dark:text-white">{Math.ceil(hours / 40)} Weeks</p>
                   </div>
                   <div className="bg-white dark:bg-slate-800 p-4 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700">
                     <div className="flex items-center gap-2 text-slate-500 dark:text-slate-400 mb-2">
                       <Calculator className="w-4 h-4" /> <span className="text-xs font-semibold uppercase">Launch Date</span>
                     </div>
-                    <p className="font-bold text-slate-900 dark:text-white">{estimate.projectedDate}</p>
+                    <p className="font-bold text-slate-900 dark:text-white">{new Date(Date.now() + Math.ceil(hours / 40) * 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0]}</p>
                   </div>
                 </div>
                 
@@ -181,9 +199,12 @@ export function QuoteModule() {
                   </a>
                 </div>
 
-                <div className="mt-4 p-3 bg-slate-100 dark:bg-slate-800/50 rounded-lg">
+                <div className="mt-4 p-3 bg-slate-100 dark:bg-slate-800/50 rounded-lg space-y-2">
                   <p className="text-xs text-slate-500 dark:text-slate-400 italic">
-                    {t("quote.disclaimer")}
+                    {t("quote.disclaimer.note")}
+                  </p>
+                  <p className="text-xs font-semibold text-slate-700 dark:text-slate-300">
+                    {t("quote.disclaimer.fee")}
                   </p>
                 </div>
               </div>
