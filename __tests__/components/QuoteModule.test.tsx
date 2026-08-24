@@ -1,39 +1,63 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { QuoteModule } from '@/app/components/QuoteModule';
+
+// Mock translation hook
+jest.mock('@/app/hooks/useTranslation', () => ({
+  useTranslation: () => ({
+    t: (key: string) => key,
+  })
+}));
 
 // Mock fetch
 global.fetch = jest.fn(() =>
   Promise.resolve({
     ok: true,
-    json: () => Promise.resolve({ success: true }),
+    json: () => Promise.resolve({
+      estimate: {
+        estimatedUsd: "$10,000",
+        estimatedCop: "$40,000,000",
+        estimatedTime: "2 meses",
+        complexity: "Alta",
+        recommendedStack: ["React", "Node"]
+      }
+    }),
   })
 ) as jest.Mock;
 
 describe('QuoteModule Component', () => {
-  it('should render the quote module correctly', () => {
+  it('should render the quote module title (translation key)', () => {
     render(<QuoteModule />);
-    expect(screen.getByText('Cotizador Interactivo')).toBeInTheDocument();
+    expect(screen.getByText('quote.title')).toBeInTheDocument();
   });
 
-  it('should calculate base cost correctly', () => {
+  it('should prevent submission if description is too short', () => {
     render(<QuoteModule />);
-    const slider = screen.getByRole('slider');
+    const button = screen.getByRole('button', { name: /quote.button/i });
+    expect(button).toBeDisabled();
     
-    // Change to 100 hours
-    fireEvent.change(slider, { target: { value: '100' } });
-    expect(screen.getByText('Horas Estimadas de Desarrollo: 100h')).toBeInTheDocument();
+    const textarea = screen.getByPlaceholderText('quote.placeholder');
+    fireEvent.change(textarea, { target: { value: 'short' } });
     
-    // 100 hours * $45 = $4,500
-    expect(screen.getByText('$4,500.00')).toBeInTheDocument();
+    expect(button).toBeDisabled(); // 5 chars < 10
   });
 
-  it('should apply source code markup correctly', () => {
+  it('should submit and display AI estimation', async () => {
     render(<QuoteModule />);
-    const modelSelect = screen.getAllByRole('combobox')[0]; // First select is model
+    const textarea = screen.getByPlaceholderText('quote.placeholder');
+    const emailInput = screen.getByPlaceholderText('name@company.com');
+    const button = screen.getByRole('button', { name: /quote.button/i });
     
-    fireEvent.change(modelSelect, { target: { value: 'source' } });
+    fireEvent.change(textarea, { target: { value: 'This is a valid long description for the AI to parse.' } });
+    fireEvent.change(emailInput, { target: { value: 'test@ludoia.com' } });
     
-    // 100 hours * $45 * 2.5 markup = $11,250
-    expect(screen.getByText('$11,250.00')).toBeInTheDocument();
+    expect(button).not.toBeDisabled();
+    
+    fireEvent.click(button);
+    
+    await waitFor(() => {
+      expect(screen.getByText('AI Estimate Results')).toBeInTheDocument();
+      expect(screen.getByText('$10,000')).toBeInTheDocument();
+      expect(screen.getByText('Alta')).toBeInTheDocument();
+    });
   });
 });

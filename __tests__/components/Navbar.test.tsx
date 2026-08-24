@@ -6,6 +6,14 @@ jest.mock('next-themes', () => ({
   useTheme: () => ({ theme: 'light', setTheme: jest.fn() })
 }));
 
+jest.mock('@/app/hooks/useTranslation', () => ({
+  useTranslation: () => ({
+    t: (key: string) => key,
+    language: 'es',
+    setLanguage: jest.fn()
+  })
+}));
+
 describe('Navbar Component', () => {
   it('should render the logo text', () => {
     render(<Navbar />);

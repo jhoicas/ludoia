@@ -1,0 +1,22 @@
+{
+  "nav.home": "Inicio",
+  "nav.cases": "Casos de Éxito",
+  "nav.quote": "Cotizador AI",
+  "nav.cta": "Comenzar",
+  "hero.title": "Software a la Medida de Calidad Global",
+  "hero.subtitle": "Modernizamos procesos mediante soluciones digitales ergonómicas para empresas que transforman industrias a nivel mundial.",
+  "hero.ctaPrimary": "Cotizar Proyecto",
+  "hero.ctaSecondary": "Ver Ecosistema",
+  "tech.title": "Stack Tecnológico y Certificaciones",
+  "tech.cat.frontend": "Frontend & UI",
+  "tech.cat.backend": "Backend & Core",
+  "tech.cat.cloud": "Cloud & DevOps",
+  "tech.cat.data": "Data & AI",
+  "cases.title": "Ecosistema de Soluciones Globales",
+  "cases.subtitle": "Casos de éxito de ingeniería de software a la medida.",
+  "quote.title": "Estimador de Proyectos con IA",
+  "quote.subtitle": "Describe tu necesidad y nuestra IA estructurará un plan técnico.",
+  "quote.placeholder": "Ej: Necesito un software para gestionar 500 propiedades en alquiler, con app móvil para inquilinos y portal de pagos...",
+  "quote.button": "Generar Estimación",
+  "quote.disclaimer": "Nota: Esta estimación es un borrador preliminar generado automáticamente. Un análisis técnico detallado se realizará en la llamada de descubrimiento."
+}

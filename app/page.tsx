@@ -4,7 +4,8 @@ import { TechStack } from "./components/TechStack";
 import { BentoGrid } from "./components/BentoGrid";
 import { QuoteModule } from "./components/QuoteModule";
 import { Chatbot } from "./components/Chatbot";
-import FloatingWhatsapp from "./components/FloatingWhatsapp";
+import { FloatingWhatsapp } from "./components/FloatingWhatsapp";
+import { Footer } from "./components/Footer";
 
 export default function Home() {
   return (
@@ -18,6 +19,7 @@ export default function Home() {
       </main>
       <Chatbot />
       <FloatingWhatsapp />
+      <Footer />
     </>
   );
 }

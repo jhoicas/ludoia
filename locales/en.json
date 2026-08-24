@@ -1,0 +1,22 @@
+{
+  "nav.home": "Home",
+  "nav.cases": "Case Studies",
+  "nav.quote": "AI Quoter",
+  "nav.cta": "Get Started",
+  "hero.title": "Global Quality Custom Software",
+  "hero.subtitle": "We modernize processes through ergonomic digital solutions for enterprises transforming industries worldwide.",
+  "hero.ctaPrimary": "Get a Quote",
+  "hero.ctaSecondary": "View Ecosystem",
+  "tech.title": "Tech Stack & Certifications",
+  "tech.cat.frontend": "Frontend & UI",
+  "tech.cat.backend": "Backend & Core",
+  "tech.cat.cloud": "Cloud & DevOps",
+  "tech.cat.data": "Data & AI",
+  "cases.title": "Global Solutions Ecosystem",
+  "cases.subtitle": "Custom software engineering success stories.",
+  "quote.title": "AI Project Estimator",
+  "quote.subtitle": "Describe your need and our AI will structure a technical plan.",
+  "quote.placeholder": "E.g: I need a software to manage 500 rental properties, with a mobile app for tenants and a payment portal...",
+  "quote.button": "Generate Estimate",
+  "quote.disclaimer": "Note: This estimate is a preliminary draft generated automatically. A detailed technical analysis will be conducted during the discovery call."
+}
