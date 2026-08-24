@@ -42,7 +42,10 @@ export function TechStack() {
       icon: <Database className="h-6 w-6 text-orange-500" />,
       items: [
         { name: "PostgreSQL", src: "https://cdn.simpleicons.org/postgresql/4169E1" },
+        { name: "SQL Server", src: "https://cdn.simpleicons.org/microsoftsqlserver/CC2927" },
         { name: "MongoDB", src: "https://cdn.simpleicons.org/mongodb/47A248" },
+        { name: "Azure Cosmos DB", icon: <Database className="w-5 h-5 text-blue-500" /> },
+        { name: "IBM DB2", src: "https://cdn.simpleicons.org/ibm/052FAD" },
         { name: "Redis", src: "https://cdn.simpleicons.org/redis/DC382D" },
         { name: "OpenAI", icon: <BrainCircuit className="w-5 h-5 text-emerald-600 dark:text-emerald-400" /> },
         { name: "Claude", src: "https://cdn.simpleicons.org/anthropic/D97757" },
@@ -54,9 +57,15 @@ export function TechStack() {
   return (
     <section className="py-16 bg-white dark:bg-slate-950 border-y border-slate-200 dark:border-slate-800">
       <div className="mx-auto max-w-6xl px-4 text-center">
-        <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-12">
+        <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-4">
           {t("tech.title")}
         </h2>
+        
+        <div className="mb-12 max-w-2xl mx-auto">
+          <p className="text-sm md:text-base font-medium text-slate-600 dark:text-slate-300 bg-slate-100 dark:bg-slate-800/50 py-3 px-6 rounded-full border border-slate-200 dark:border-slate-700">
+            {t("tech.team_exp")}
+          </p>
+        </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {categories.map((cat, idx) => (

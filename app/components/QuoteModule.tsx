@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useTranslation } from "../hooks/useTranslation";
-import { Calculator, Clock, Code, Shield } from "lucide-react";
+import { Calculator, Clock, Code, Shield, MessageCircle } from "lucide-react";
 
 type EstimateResult = {
   estimatedPriceUSD: number;
@@ -141,9 +141,21 @@ export function QuoteModule() {
                   </div>
                 </div>
 
+                <div className="pt-4 mt-6 border-t border-slate-200 dark:border-slate-800">
+                  <a 
+                    href={`https://wa.me/573225525998?text=${encodeURIComponent(t("quote.whatsapp.msg"))}`} 
+                    target="_blank" 
+                    rel="noreferrer" 
+                    className="flex items-center justify-center gap-2 w-full py-3 bg-[#25D366] hover:bg-[#1EBE5A] text-white rounded-xl font-bold transition-all shadow-md hover:shadow-lg"
+                  >
+                    <MessageCircle className="w-5 h-5" />
+                    {t("quote.whatsapp.cta")}
+                  </a>
+                </div>
+
                 <div className="mt-4 p-3 bg-slate-100 dark:bg-slate-800/50 rounded-lg">
                   <p className="text-xs text-slate-500 dark:text-slate-400 italic">
-                    {estimate.disclaimer}
+                    {t("quote.disclaimer")}
                   </p>
                 </div>
               </div>

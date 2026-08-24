@@ -8,15 +8,21 @@
   "hero.ctaPrimary": "Get a Quote",
   "hero.ctaSecondary": "View Ecosystem",
   "tech.title": "Tech Stack & Certifications",
-  "tech.cat.frontend": "Frontend & UI",
+  "tech.cat.frontend": "Frontend",
   "tech.cat.backend": "Backend & Core",
   "tech.cat.cloud": "Cloud & DevOps",
   "tech.cat.data": "Data & AI",
+  "tech.team_exp": "Our multidisciplinary engineering team brings extensive hands-on experience and proven certifications across these world-class technologies.",
   "cases.title": "Global Solutions Ecosystem",
   "cases.subtitle": "Custom software engineering success stories.",
   "quote.title": "AI Project Estimator",
   "quote.subtitle": "Describe your need and our AI will structure a technical plan.",
+  "quote.features.1": "AI-Powered Technical Assessment",
+  "quote.features.2": "Custom Time & Cost Estimation",
+  "quote.features.3": "Actionable Tech Stack Recommendation",
   "quote.placeholder": "E.g: I need a software to manage 500 rental properties, with a mobile app for tenants and a payment portal...",
   "quote.button": "Generate Estimate",
-  "quote.disclaimer": "Note: This estimate is a preliminary draft generated automatically. A detailed technical analysis will be conducted during the discovery call."
+  "quote.whatsapp.cta": "Talk with a Specialist on WhatsApp",
+  "quote.whatsapp.msg": "Hello Ludoia, I just generated an estimate for my project...",
+  "quote.disclaimer": "This is a preliminary estimate. For an exact technical breakdown, please contact our professional in charge via WhatsApp."
 }
