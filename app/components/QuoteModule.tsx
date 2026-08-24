@@ -21,18 +21,27 @@ export function QuoteModule() {
   const [description, setDescription] = useState("");
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [errorMessage, setErrorMessage] = useState("");
   const [estimate, setEstimate] = useState<EstimateResult | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus("loading");
     setEstimate(null);
+    setErrorMessage("");
     try {
       const res = await fetch("/api/quote", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, projectDescription: description }),
       });
+      
+      if (res.status === 429) {
+        setErrorMessage(t("quote.rateLimitExceeded"));
+        setStatus("error");
+        return;
+      }
+
       if (!res.ok) throw new Error("Failed");
       const data = await res.json();
       setEstimate(data.estimate);
@@ -90,7 +99,9 @@ export function QuoteModule() {
             </form>
             
             {status === "error" && (
-              <p className="text-red-600 dark:text-red-400 text-sm mt-4 text-center font-medium">Error connecting to AI. Please try again.</p>
+              <p className="text-red-600 dark:text-red-400 text-sm mt-4 text-center font-medium">
+                {errorMessage || "Error connecting to AI. Please try again."}
+              </p>
             )}
             
             <div className="mt-6 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-xl border border-blue-100 dark:border-blue-900/30 flex items-start gap-3">

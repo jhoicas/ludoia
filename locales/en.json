@@ -24,5 +24,6 @@
   "quote.button": "Generate Estimate",
   "quote.whatsapp.cta": "Talk with a Specialist on WhatsApp",
   "quote.whatsapp.msg": "Hello Ludoia, I just generated an estimate for my project...",
-  "quote.disclaimer": "This is a preliminary estimate. For an exact technical breakdown, please contact our professional in charge via WhatsApp."
+  "quote.disclaimer": "This is a preliminary estimate. For an exact technical breakdown, please contact our professional in charge via WhatsApp.",
+  "quote.rateLimitExceeded": "Automatic queries are temporarily limited to 5 attempts for system security and protection. If you need further details about your project, please contact us directly via WhatsApp."
 }

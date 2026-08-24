@@ -24,5 +24,6 @@
   "quote.features.3": "Recomendación Práctica de Stack Tecnológico",
   "quote.whatsapp.cta": "Hablar con un Especialista en WhatsApp",
   "quote.whatsapp.msg": "Hola Ludoia, acabo de generar una estimación para mi proyecto...",
-  "quote.disclaimer": "Esta es una estimación preliminar. Para un desglose técnico exacto, contáctate con nuestro profesional encargado a través de WhatsApp."
+  "quote.disclaimer": "Esta es una estimación preliminar. Para un desglose técnico exacto, contáctate con nuestro profesional encargado a través de WhatsApp.",
+  "quote.rateLimitExceeded": "Las consultas automáticas están temporalmente limitadas a 5 intentos por protección y seguridad del sistema. Si necesitas más información sobre tu proyecto, escríbenos directamente por WhatsApp."
 }
