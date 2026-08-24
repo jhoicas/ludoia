@@ -7,11 +7,12 @@ const anthropic = new Anthropic({
   apiKey: process.env.ANTHROPIC_API_KEY || 'dummy',
 });
 
-const SYSTEM_PROMPT = `
+const getSystemPrompt = (language: string) => `
 Eres un Arquitecto de Software Experto evaluando requerimientos técnicos.
 El usuario te dará la descripción de una idea de software a la medida.
 Debes estimar el costo y el tiempo de desarrollo.
 
+El usuario tiene la interfaz en idioma: ${language.toUpperCase()}.
 Tu respuesta DEBE ser ÚNICAMENTE un JSON válido con esta estructura exacta (calculando los valores numéricos basándote en la complejidad):
 {
   "reasoning": "Se detectó un sitio informativo simple tipo blog, por lo que se requiere únicamente un maquetado estático con gestor de contenidos básico.",
@@ -19,12 +20,7 @@ Tu respuesta DEBE ser ÚNICAMENTE un JSON válido con esta estructura exacta (ca
   "estimatedPriceUSD": 2500,
   "estimatedPriceCOP": 10000000,
   "estimatedTimeWeeks": 2,
-  "projectedDate": "2026-11-01",
-  "businessModels": {
-    "saas": "Licenciamiento mensual/anual con infraestructura gestionada.",
-    "fullOwnership": "Transferencia del 100% del código fuente y propiedad intelectual."
-  },
-  "disclaimer": "Esta estimación es un borrador preliminar. Se requiere una sesión de descubrimiento para un alcance definitivo."
+  "projectedDate": "2026-11-01"
 }
 
 Reglas de Escala de Precios (Estricto - 4 Niveles):
@@ -34,9 +30,10 @@ Reglas de Escala de Precios (Estricto - 4 Niveles):
 - Enterprise / Alta Escala: $28,000 - $70,000+ USD (12 - 24+ Semanas). Keywords: concurrencia, 1 millón, visitas, alta disponibilidad, microservicios, IA integrada.
 
 Explica tu evaluación técnica detallada en el campo "reasoning" y recomienda el stack en "architecture".
-IMPORTANTE DETECCIÓN DE IDIOMA: Analiza el idioma de la descripción provista por el usuario. Si el usuario escribe en inglés, los campos "reasoning" y "architecture" DEBEN estar redactados estrictamente en INGLÉS. Si escribe en español, redacta en ESPAÑOL.
+IMPORTANTE DETECCIÓN DE IDIOMA: Asegúrate que "reasoning" y "architecture" DEBEN estar redactados estrictamente en el idioma solicitado (${language.toUpperCase()}).
 No incluyas texto markdown, solo JSON.
 `;
+
 
 export async function POST(req: Request) {
   try {
@@ -107,12 +104,8 @@ export async function POST(req: Request) {
         estimatedPriceUSD: priceUSD,
         estimatedPriceCOP: priceCOP,
         estimatedTimeWeeks: weeks,
-        projectedDate: new Date(Date.now() + weeks * 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
-        businessModels: {
-          saas: "Licenciamiento mensual/anual con infraestructura gestionada.",
-          fullOwnership: "Transferencia del 100% del código fuente y propiedad intelectual."
-        },
-        disclaimer: "Esta estimación es un borrador preliminar generado algorítmicamente. Se requiere una sesión de descubrimiento para un alcance definitivo."
+        estimatedTimeWeeks: weeks,
+        projectedDate: new Date(Date.now() + weeks * 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0]
       };
     };
 
@@ -126,7 +119,7 @@ export async function POST(req: Request) {
         model: 'claude-3-haiku-20240307',
         max_tokens: 500,
         temperature: 0.1,
-        system: SYSTEM_PROMPT,
+        system: getSystemPrompt(parsed.data.language),
         messages: [{ role: 'user', content: parsed.data.projectDescription }]
       });
 

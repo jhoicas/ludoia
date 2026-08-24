@@ -11,15 +11,10 @@ type EstimateResult = {
   estimatedPriceCOP: number;
   estimatedTimeWeeks: number;
   projectedDate: string;
-  businessModels: {
-    saas: string;
-    fullOwnership: string;
-  };
-  disclaimer: string;
 };
 
 export function QuoteModule() {
-  const { t } = useTranslation();
+  const { t, language } = useTranslation();
   const [description, setDescription] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState("");
@@ -35,7 +30,7 @@ export function QuoteModule() {
       const res = await fetch("/api/quote", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ projectDescription: description }),
+        body: JSON.stringify({ projectDescription: description, language }),
       });
       
       if (res.status === 429) {
@@ -165,18 +160,24 @@ export function QuoteModule() {
                 
                 <div className="pt-4 border-t border-slate-200 dark:border-slate-800 space-y-4">
                   <div>
-                    <p className="text-sm font-bold text-slate-700 dark:text-slate-300 mb-1">SaaS Model</p>
-                    <p className="text-xs text-slate-500 dark:text-slate-400">{estimate.businessModels.saas}</p>
+                    <p className="text-sm font-bold text-slate-700 dark:text-slate-300 mb-1">{t("quote.saas.title") as string}</p>
+                    <p className="text-xs text-slate-500 dark:text-slate-400">{t("quote.saas.desc") as string}</p>
                   </div>
                   <div>
-                    <p className="text-sm font-bold text-slate-700 dark:text-slate-300 mb-1">Full Ownership</p>
-                    <p className="text-xs text-slate-500 dark:text-slate-400">{estimate.businessModels.fullOwnership}</p>
+                    <p className="text-sm font-bold text-slate-700 dark:text-slate-300 mb-1">{t("quote.ownership.title") as string}</p>
+                    <p className="text-xs text-slate-500 dark:text-slate-400">{t("quote.ownership.desc") as string}</p>
                   </div>
                 </div>
 
                 <div className="pt-4 mt-6 border-t border-slate-200 dark:border-slate-800">
                   <a 
-                    href={`https://wa.me/573225525998?text=${encodeURIComponent(t("quote.whatsapp.msg"))}`} 
+                    href={`https://wa.me/573225525998?text=${encodeURIComponent(
+                      (t("quote.whatsapp.msg") as string)
+                        .replace("[projectDescription]", description)
+                        .replace("[estimatedAmount]", (hours * 40).toLocaleString())
+                        .replace("[hours]", hours.toString())
+                        .replace("[weeks]", Math.ceil(hours / 40).toString())
+                    )}`} 
                     target="_blank" 
                     rel="noreferrer" 
                     className="flex items-center justify-center gap-2 w-full py-3 bg-[#25D366] hover:bg-[#1EBE5A] text-white rounded-xl font-bold transition-all shadow-md hover:shadow-lg"

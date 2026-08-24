@@ -4,6 +4,7 @@ const stripHtml = (html: string) => html.replace(/<[^>]*>?/gm, '');
 
 export const QuoteRequestSchema = z.object({
   projectDescription: z.string().min(10, "Descripción muy corta").max(2000, "Descripción muy larga"),
+  language: z.enum(["es", "en"]).default("es")
 }).transform((data) => ({
   ...data,
   projectDescription: stripHtml(data.projectDescription)
