@@ -55,7 +55,7 @@ export async function POST(req: Request) {
       const mediumKeywords = ["integración", "integracion", "crm", "e-commerce", "ecommerce", "panel", "dashboard", "roles", "personalizado"];
       
       let isEnterprise = enterpriseKeywords.some(kw => descLower.includes(kw));
-      let isMedium = isComplex = mediumKeywords.some(kw => descLower.includes(kw)) || description.length > 200;
+      let isMedium = mediumKeywords.some(kw => descLower.includes(kw)) || description.length > 200;
       
       let priceUSD, priceCOP, weeks;
 
