@@ -6,7 +6,6 @@ import { Calculator, Clock, Code, Shield, MessageCircle } from "lucide-react";
 
 type EstimateResult = {
   reasoning?: string;
-  architecture?: string;
   estimatedPriceUSD: number;
   estimatedPriceCOP: number;
   estimatedTimeWeeks: number;
@@ -112,12 +111,6 @@ export function QuoteModule() {
                     <p className="text-sm text-indigo-900 dark:text-indigo-200 leading-relaxed italic">
                       "{estimate.reasoning}"
                     </p>
-                    {estimate.architecture && (
-                      <div className="mt-3 flex items-center gap-2">
-                        <Code className="w-4 h-4 text-indigo-500" />
-                        <span className="text-xs font-semibold text-indigo-700 dark:text-indigo-300">Suggested Stack: {estimate.architecture}</span>
-                      </div>
-                    )}
                   </div>
                 )}
 

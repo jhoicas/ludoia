@@ -8,25 +8,25 @@ export function BentoGrid() {
 
   const cases = [
     {
-      title: "Agendador",
+      title: t("cases.agendador.title"),
       url: "https://agendador.ludoia.com/",
-      desc: "Gestión de reservas, agendamiento inteligente, recordatorios automáticos y sincronización multi-calendario.",
+      desc: t("cases.agendador.desc"),
       colSpan: "col-span-1 lg:col-span-2",
       bg: "bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20",
       icon: <Calendar className="h-6 w-6 text-blue-600" />
     },
     {
-      title: "SystemTravels",
+      title: t("cases.systemtravels.title"),
       url: "https://systemtravels.app/",
-      desc: "Software integral para agencias de viajes, emisión de itinerarios, liquidación de proveedores, booking engine y CRM turístico.",
+      desc: t("cases.systemtravels.desc"),
       colSpan: "col-span-1 lg:col-span-1",
       bg: "bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-900/20 dark:to-teal-900/20",
       icon: <Building2 className="h-6 w-6 text-emerald-600" />
     },
     {
-      title: "StockIA",
+      title: t("cases.stockia.title"),
       url: "https://stock.ludoia.com/",
-      desc: "Control de inventarios multi-bodega con analítica predictiva de stock y alertas automáticas mediante IA.",
+      desc: t("cases.stockia.desc"),
       colSpan: "col-span-1 lg:col-span-3",
       bg: "bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20",
       icon: <PackageSearch className="h-6 w-6 text-purple-600" />
@@ -59,11 +59,11 @@ export function BentoGrid() {
                   <div className="p-3 bg-white dark:bg-slate-800 rounded-xl shadow-sm">
                     {c.icon}
                   </div>
-                  <h3 className="text-2xl font-bold text-slate-900 dark:text-white">{c.title}</h3>
+                  <h3 className="text-2xl font-bold text-slate-900 dark:text-white">{c.title as string}</h3>
                 </div>
                 <ExternalLink className="h-5 w-5 text-slate-400 group-hover:text-blue-600 transition-colors" />
               </div>
-              <p className="text-slate-600 dark:text-slate-300 relative z-10 font-medium">{c.desc}</p>
+              <p className="text-slate-600 dark:text-slate-300 relative z-10 font-medium">{c.desc as string}</p>
               
               {/* Interactive Mockup overlay hint */}
               <div className="absolute -bottom-8 -right-8 w-64 h-64 bg-white/40 dark:bg-black/20 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>

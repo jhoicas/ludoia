@@ -15,7 +15,7 @@ describe('BentoGrid Component', () => {
 
   it('should render Agendador and StockIA cases', () => {
     render(<BentoGrid />);
-    expect(screen.getByText('Agendador')).toBeInTheDocument();
-    expect(screen.getByText('StockIA')).toBeInTheDocument();
+    expect(screen.getByText('cases.agendador.title')).toBeInTheDocument();
+    expect(screen.getByText('cases.stockia.title')).toBeInTheDocument();
   });
 });

@@ -16,7 +16,6 @@ El usuario tiene la interfaz en idioma: ${language.toUpperCase()}.
 Tu respuesta DEBE ser ÚNICAMENTE un JSON válido con esta estructura exacta (calculando los valores numéricos basándote en la complejidad):
 {
   "reasoning": "Se detectó un sitio informativo simple tipo blog, por lo que se requiere únicamente un maquetado estático con gestor de contenidos básico.",
-  "architecture": "Next.js + Tailwind CSS + CMS Headless",
   "estimatedPriceUSD": 2500,
   "estimatedPriceCOP": 10000000,
   "estimatedTimeWeeks": 2,
@@ -29,8 +28,8 @@ Reglas de Escala de Precios (Estricto - 4 Niveles):
 - Plataforma / Complejidad Media: $11,000 - $25,000 USD (6 - 12 Semanas). Keywords: e-commerce, tienda, pasarela de pagos, crm, dashboard, panel de administración.
 - Enterprise / Alta Escala: $28,000 - $70,000+ USD (12 - 24+ Semanas). Keywords: concurrencia, 1 millón, visitas, alta disponibilidad, microservicios, IA integrada.
 
-Explica tu evaluación técnica detallada en el campo "reasoning" y recomienda el stack en "architecture".
-IMPORTANTE DETECCIÓN DE IDIOMA: Asegúrate que "reasoning" y "architecture" DEBEN estar redactados estrictamente en el idioma solicitado (${language.toUpperCase()}).
+Explica tu evaluación técnica detallada en el campo "reasoning".
+IMPORTANTE DETECCIÓN DE IDIOMA: Asegúrate que "reasoning" DEBE estar redactado estrictamente en el idioma solicitado (${language.toUpperCase()}).
 No incluyas texto markdown, solo JSON.
 `;
 
@@ -62,7 +61,7 @@ export async function POST(req: Request) {
       let isMvp = mvpKeywords.some(kw => descLower.includes(kw));
       let isBasic = basicKeywords.some(kw => descLower.includes(kw));
       
-      let priceUSD, priceCOP, weeks, reasoning, architecture;
+      let priceUSD, priceCOP, weeks, reasoning;
       const isEnglish = descLower.includes(" the ") || descLower.includes(" and ") || descLower.includes(" I need ");
 
       if (isEnterprise) {
@@ -70,25 +69,21 @@ export async function POST(req: Request) {
         priceCOP = 160000000;
         weeks = 18;
         reasoning = isEnglish ? "A very high scale and critical technical requirement was identified, needing massive data handling and high availability." : "Se identificó un requerimiento de altísima escala y criticidad técnica con necesidad de manejo masivo y alta disponibilidad.";
-        architecture = "Kubernetes + Microservicios (Go/Node.js) + PostgreSQL + Redis + CDN global";
       } else if (isMedium) {
         priceUSD = 18000;
         priceCOP = 72000000;
         weeks = 10;
         reasoning = isEnglish ? "A medium complexity platform requiring core business integrations (e-commerce, CRM, etc.) was identified." : "Se identificó una plataforma de complejidad media que requiere integraciones de negocio core, como comercio electrónico o gestión de usuarios avanzada.";
-        architecture = "Next.js + Node.js/NestJS + PostgreSQL + Stripe/MercadoPago";
       } else if (isMvp || description.length > 200) {
         priceUSD = 7500;
         priceCOP = 30000000;
         weeks = 5;
         reasoning = isEnglish ? "An MVP system was detected to validate essential business functions with real users (registration, relational database)." : "Se detectó un sistema MVP para validar funciones esenciales de negocio con usuarios reales (registro, base de datos relacional).";
-        architecture = "Next.js + Tailwind CSS + Supabase/Firebase";
       } else {
         priceUSD = 2500;
         priceCOP = 10000000;
         weeks = 2;
         reasoning = isEnglish ? "A purely informative or basic web presence requirement without complex transactional logic was detected." : "Se detectó un requerimiento de carácter informativo o de presencia web rápida sin lógica transaccional compleja.";
-        architecture = "Next.js + Tailwind CSS + CMS Headless (Sanity/Strapi)";
       }
 
       if ((descLower.includes("blog") || descLower.includes("mostrar información") || descLower.includes("mostrar informacion")) && priceUSD > 3000) {
@@ -100,7 +95,6 @@ export async function POST(req: Request) {
 
       return {
         reasoning,
-        architecture,
         estimatedPriceUSD: priceUSD,
         estimatedPriceCOP: priceCOP,
         estimatedTimeWeeks: weeks,
