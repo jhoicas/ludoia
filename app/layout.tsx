@@ -30,9 +30,12 @@ export const metadata: Metadata = {
     description: "Global quality custom software for modern enterprises.",
   },
   icons: {
-    icon: "/icon.png",
-    shortcut: "/icon.png",
-    apple: "/icon.png",
+    icon: [
+      { url: '/icon.png', type: 'image/png' },
+      { url: '/favicon.ico', sizes: 'any' }
+    ],
+    shortcut: '/icon.png',
+    apple: '/icon.png',
   }
 };
 
