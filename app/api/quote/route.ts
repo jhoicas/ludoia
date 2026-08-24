@@ -12,13 +12,17 @@ Eres un Arquitecto de Software Experto evaluando requerimientos técnicos.
 El usuario te dará la descripción de una idea de software a la medida.
 Debes estimar el costo y el tiempo de desarrollo.
 
-Tu respuesta DEBE ser ÚNICAMENTE un JSON válido con esta estructura exacta:
+Tu respuesta DEBE ser ÚNICAMENTE un JSON válido con esta estructura exacta (calculando los valores numéricos basándote en la complejidad):
 {
-  "estimatedUsd": "Rango en USD (ej: $10,000 - $15,000)",
-  "estimatedCop": "Rango en COP (ej: $40,000,000 - $60,000,000)",
-  "estimatedTime": "Tiempo estimado (ej: 3 a 4 meses)",
-  "complexity": "Baja, Media o Alta",
-  "recommendedStack": ["React", "Node.js", "PostgreSQL"]
+  "estimatedPriceUSD": 12000,
+  "estimatedPriceCOP": 48000000,
+  "estimatedTimeWeeks": 8,
+  "projectedDate": "2026-11-01",
+  "businessModels": {
+    "saas": "Licenciamiento mensual/anual con infraestructura gestionada.",
+    "fullOwnership": "Transferencia del 100% del código fuente y propiedad intelectual."
+  },
+  "disclaimer": "Esta estimación es un borrador preliminar. Se requiere una sesión de descubrimiento para un alcance definitivo."
 }
 
 Reglas:
@@ -42,8 +46,28 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'Invalid input' }, { status: 400 });
     }
 
-    // Connect to AI if not testing dummy
-    if (process.env.ANTHROPIC_API_KEY) {
+    const getFallbackEstimate = (description: string) => {
+      const isComplex = description.length > 200 || description.toLowerCase().includes('integración');
+      const weeks = isComplex ? 12 : 6;
+      return {
+        estimatedPriceUSD: isComplex ? 15000 : 8000,
+        estimatedPriceCOP: isComplex ? 60000000 : 32000000,
+        estimatedTimeWeeks: weeks,
+        projectedDate: new Date(Date.now() + weeks * 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+        businessModels: {
+          saas: "Licenciamiento mensual/anual con infraestructura gestionada.",
+          fullOwnership: "Transferencia del 100% del código fuente y propiedad intelectual."
+        },
+        disclaimer: "Esta estimación es un borrador preliminar generado algorítmicamente. Se requiere una sesión de descubrimiento para un alcance definitivo."
+      };
+    };
+
+    if (!process.env.ANTHROPIC_API_KEY) {
+      console.warn('ANTHROPIC_API_KEY is not defined. Falling back to algorithmic estimate.');
+      return NextResponse.json({ success: true, estimate: getFallbackEstimate(parsed.data.projectDescription) });
+    }
+
+    try {
       const response = await anthropic.messages.create({
         model: 'claude-3-haiku-20240307',
         max_tokens: 500,
@@ -53,36 +77,11 @@ export async function POST(req: Request) {
       });
 
       const aiText = response.content[0].type === 'text' ? response.content[0].text : '{}';
-      
-      try {
-        const jsonResponse = JSON.parse(aiText);
-        return NextResponse.json({ success: true, estimate: jsonResponse });
-      } catch (e) {
-        console.error("Failed to parse Claude JSON", aiText);
-        // Fallback if Claude hallucinates text around JSON
-        return NextResponse.json({ 
-          success: true, 
-          estimate: {
-            estimatedUsd: "$10,000 - $20,000",
-            estimatedCop: "$40,000,000 - $80,000,000",
-            estimatedTime: "2 - 4 meses",
-            complexity: "Media",
-            recommendedStack: ["React", "Node.js"]
-          }
-        });
-      }
-    } else {
-      // Dummy response for tests / missing key
-      return NextResponse.json({ 
-        success: true, 
-        estimate: {
-          estimatedUsd: "$5,000 - $10,000",
-          estimatedCop: "$20,000,000 - $40,000,000",
-          estimatedTime: "1 - 2 meses",
-          complexity: "Baja",
-          recommendedStack: ["React", "AWS"]
-        }
-      });
+      const jsonResponse = JSON.parse(aiText);
+      return NextResponse.json({ success: true, estimate: jsonResponse });
+    } catch (e) {
+      console.error("AI API call failed or parsing error:", e);
+      return NextResponse.json({ success: true, estimate: getFallbackEstimate(parsed.data.projectDescription) });
     }
 
   } catch (error) {

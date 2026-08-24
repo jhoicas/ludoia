@@ -29,6 +29,11 @@ export const metadata: Metadata = {
     title: "Ludoia | Software Engineering",
     description: "Global quality custom software for modern enterprises.",
   },
+  icons: {
+    icon: "/icon.png",
+    shortcut: "/icon.png",
+    apple: "/icon.png",
+  }
 };
 
 export default function RootLayout({

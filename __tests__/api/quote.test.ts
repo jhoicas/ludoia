@@ -8,7 +8,7 @@ jest.mock('@anthropic-ai/sdk', () => {
   return jest.fn().mockImplementation(() => ({
     messages: {
       create: jest.fn().mockResolvedValue({
-        content: [{ type: 'text', text: '{"estimatedUsd": "$10,000", "complexity": "Alta"}' }]
+        content: [{ type: 'text', text: '{"estimatedPriceUSD": 12000, "estimatedPriceCOP": 48000000, "estimatedTimeWeeks": 8, "projectedDate": "2026-11-01", "businessModels": {"saas": "SaaS model", "fullOwnership": "Full ownership"}, "disclaimer": "Disclaimer"}' }]
       })
     }
   }));
@@ -62,7 +62,6 @@ describe('Quote API Endpoint', () => {
     expect(res.status).toBe(200);
     const json = await res.json();
     expect(json.success).toBe(true);
-    expect(json.estimate).toHaveProperty('estimatedUsd');
-    expect(json.estimate).toHaveProperty('complexity');
+    expect(json.estimate).toHaveProperty('estimatedPriceUSD');
   });
 });

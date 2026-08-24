@@ -10,22 +10,42 @@ export function TechStack() {
     {
       title: t("tech.cat.frontend"),
       icon: <Layout className="h-6 w-6 text-blue-500" />,
-      items: ["React", "Next.js", "Vue", "Angular", "Tailwind CSS", "TypeScript"]
+      items: [
+        { name: "React", src: "https://cdn.simpleicons.org/react/61DAFB" },
+        { name: "Next.js", src: "https://cdn.simpleicons.org/nextdotjs/black" },
+        { name: "Vue", src: "https://cdn.simpleicons.org/vuedotjs/4FC08D" },
+        { name: "Angular", src: "https://cdn.simpleicons.org/angular/DD0031" }
+      ]
     },
     {
       title: t("tech.cat.backend"),
       icon: <Server className="h-6 w-6 text-emerald-500" />,
-      items: [".NET", "Golang", "Python", "Node.js"]
+      items: [
+        { name: ".NET", src: "https://cdn.simpleicons.org/dotnet/512BD4" },
+        { name: "Golang", src: "https://cdn.simpleicons.org/go/00ADD8" },
+        { name: "Python", src: "https://cdn.simpleicons.org/python/3776AB" },
+        { name: "Node.js", src: "https://cdn.simpleicons.org/nodedotjs/339933" }
+      ]
     },
     {
       title: t("tech.cat.cloud"),
       icon: <Cloud className="h-6 w-6 text-indigo-500" />,
-      items: ["AWS", "Microsoft Azure", "DigitalOcean", "Docker", "Kubernetes"]
+      items: [
+        { name: "AWS", src: "https://cdn.simpleicons.org/amazonaws/232F3E" },
+        { name: "Azure", src: "https://cdn.simpleicons.org/microsoftazure/0078D4" },
+        { name: "Docker", src: "https://cdn.simpleicons.org/docker/2496ED" },
+        { name: "Kubernetes", src: "https://cdn.simpleicons.org/kubernetes/326CE5" }
+      ]
     },
     {
       title: t("tech.cat.data"),
       icon: <Database className="h-6 w-6 text-orange-500" />,
-      items: ["PostgreSQL", "MongoDB", "Redis", "Claude AI", "OpenAI"]
+      items: [
+        { name: "PostgreSQL", src: "https://cdn.simpleicons.org/postgresql/4169E1" },
+        { name: "MongoDB", src: "https://cdn.simpleicons.org/mongodb/47A248" },
+        { name: "Redis", src: "https://cdn.simpleicons.org/redis/DC382D" },
+        { name: "OpenAI", src: "https://cdn.simpleicons.org/openai/412991" }
+      ]
     }
   ];
 
@@ -38,16 +58,17 @@ export function TechStack() {
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {categories.map((cat, idx) => (
-            <div key={idx} className="flex flex-col items-center text-center p-6 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800">
+            <div key={idx} className="flex flex-col items-center p-6 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800">
               <div className="p-3 bg-white dark:bg-slate-800 rounded-xl shadow-sm mb-4">
                 {cat.icon}
               </div>
-              <h3 className="font-semibold text-slate-800 dark:text-slate-200 mb-4">{cat.title}</h3>
-              <div className="flex flex-wrap justify-center gap-2">
+              <h3 className="font-semibold text-slate-800 dark:text-slate-200 mb-6">{cat.title}</h3>
+              <div className="flex flex-col w-full gap-3">
                 {cat.items.map(item => (
-                  <span key={item} className="px-3 py-1 text-xs font-medium bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 rounded-full shadow-sm border border-slate-200 dark:border-slate-700">
-                    {item}
-                  </span>
+                  <div key={item.name} className="flex items-center gap-3 p-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg shadow-sm w-full">
+                    <img src={item.src} alt={`${item.name} logo`} className="w-5 h-5 dark:bg-white dark:rounded-sm dark:p-0.5" />
+                    <span className="text-sm font-medium text-slate-700 dark:text-slate-300">{item.name}</span>
+                  </div>
                 ))}
               </div>
             </div>

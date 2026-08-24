@@ -14,11 +14,15 @@ global.fetch = jest.fn(() =>
     ok: true,
     json: () => Promise.resolve({
       estimate: {
-        estimatedUsd: "$10,000",
-        estimatedCop: "$40,000,000",
-        estimatedTime: "2 meses",
-        complexity: "Alta",
-        recommendedStack: ["React", "Node"]
+        estimatedPriceUSD: 10000,
+        estimatedPriceCOP: 40000000,
+        estimatedTimeWeeks: 8,
+        projectedDate: "2026-11-01",
+        businessModels: {
+          saas: "SaaS Model",
+          fullOwnership: "Full Ownership Model"
+        },
+        disclaimer: "Estimacion preliminar"
       }
     }),
   })
@@ -56,8 +60,8 @@ describe('QuoteModule Component', () => {
     
     await waitFor(() => {
       expect(screen.getByText('AI Estimate Results')).toBeInTheDocument();
-      expect(screen.getByText('$10,000')).toBeInTheDocument();
-      expect(screen.getByText('Alta')).toBeInTheDocument();
+      expect(screen.getByText('$10,000 USD')).toBeInTheDocument();
+      expect(screen.getByText('8 Weeks')).toBeInTheDocument();
     });
   });
 });

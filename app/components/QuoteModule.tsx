@@ -5,11 +5,15 @@ import { useTranslation } from "../hooks/useTranslation";
 import { Calculator, Clock, Code, Shield } from "lucide-react";
 
 type EstimateResult = {
-  estimatedUsd: string;
-  estimatedCop: string;
-  estimatedTime: string;
-  complexity: string;
-  recommendedStack: string[];
+  estimatedPriceUSD: number;
+  estimatedPriceCOP: number;
+  estimatedTimeWeeks: number;
+  projectedDate: string;
+  businessModels: {
+    saas: string;
+    fullOwnership: string;
+  };
+  disclaimer: string;
 };
 
 export function QuoteModule() {
@@ -106,9 +110,9 @@ export function QuoteModule() {
               
               <div className="space-y-6">
                 <div>
-                  <p className="text-sm text-slate-500 dark:text-slate-400 mb-1">Estimated Investment (SaaS Model)</p>
-                  <p className="text-2xl font-bold text-blue-600 dark:text-blue-400">{estimate.estimatedUsd}</p>
-                  <p className="text-sm font-medium text-slate-600 dark:text-slate-300">{estimate.estimatedCop}</p>
+                  <p className="text-sm text-slate-500 dark:text-slate-400 mb-1">Estimated Investment</p>
+                  <p className="text-2xl font-bold text-blue-600 dark:text-blue-400">${estimate.estimatedPriceUSD.toLocaleString()} USD</p>
+                  <p className="text-sm font-medium text-slate-600 dark:text-slate-300">${estimate.estimatedPriceCOP.toLocaleString()} COP</p>
                 </div>
 
                 <div className="grid grid-cols-2 gap-4">
@@ -116,30 +120,31 @@ export function QuoteModule() {
                     <div className="flex items-center gap-2 text-slate-500 dark:text-slate-400 mb-2">
                       <Clock className="w-4 h-4" /> <span className="text-xs font-semibold uppercase">Timeline</span>
                     </div>
-                    <p className="font-bold text-slate-900 dark:text-white">{estimate.estimatedTime}</p>
+                    <p className="font-bold text-slate-900 dark:text-white">{estimate.estimatedTimeWeeks} Weeks</p>
                   </div>
                   <div className="bg-white dark:bg-slate-800 p-4 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700">
                     <div className="flex items-center gap-2 text-slate-500 dark:text-slate-400 mb-2">
-                      <Code className="w-4 h-4" /> <span className="text-xs font-semibold uppercase">Complexity</span>
+                      <Calculator className="w-4 h-4" /> <span className="text-xs font-semibold uppercase">Launch Date</span>
                     </div>
-                    <p className="font-bold text-slate-900 dark:text-white">{estimate.complexity}</p>
-                  </div>
-                </div>
-
-                <div>
-                  <p className="text-sm text-slate-500 dark:text-slate-400 mb-2 font-medium">Recommended Tech Stack</p>
-                  <div className="flex flex-wrap gap-2">
-                    {estimate.recommendedStack.map(tech => (
-                      <span key={tech} className="px-3 py-1 bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs font-bold rounded-md">
-                        {tech}
-                      </span>
-                    ))}
+                    <p className="font-bold text-slate-900 dark:text-white">{estimate.projectedDate}</p>
                   </div>
                 </div>
                 
-                <div className="pt-4 border-t border-slate-200 dark:border-slate-800">
-                  <p className="text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Want full Source Code Ownership?</p>
-                  <p className="text-xs text-slate-500 dark:text-slate-400">Total Intellectual Property transfer is available with a 2.5x multiplier on the estimated investment. We can discuss this in our discovery call.</p>
+                <div className="pt-4 border-t border-slate-200 dark:border-slate-800 space-y-4">
+                  <div>
+                    <p className="text-sm font-bold text-slate-700 dark:text-slate-300 mb-1">SaaS Model</p>
+                    <p className="text-xs text-slate-500 dark:text-slate-400">{estimate.businessModels.saas}</p>
+                  </div>
+                  <div>
+                    <p className="text-sm font-bold text-slate-700 dark:text-slate-300 mb-1">Full Ownership</p>
+                    <p className="text-xs text-slate-500 dark:text-slate-400">{estimate.businessModels.fullOwnership}</p>
+                  </div>
+                </div>
+
+                <div className="mt-4 p-3 bg-slate-100 dark:bg-slate-800/50 rounded-lg">
+                  <p className="text-xs text-slate-500 dark:text-slate-400 italic">
+                    {estimate.disclaimer}
+                  </p>
                 </div>
               </div>
             </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import { Menu, X, Moon, Sun, Globe } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useTranslation } from "../hooks/useTranslation";
@@ -31,9 +32,17 @@ export function Navbar() {
     <header className="sticky top-0 z-40 border-b border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-950/80 backdrop-blur">
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 md:px-6 lg:px-8">
         <a href="#inicio" className="flex items-center gap-3" aria-label="Ludoia - Global Custom Software">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#1D2B3E] text-white shadow-sm">
-            <span className="text-xl font-bold tracking-tighter">LD</span>
-          </div>
+          {mounted ? (
+            <Image 
+              src={theme === "dark" ? "/logo_darkmode.png" : "/logo_LD.png"} 
+              alt="Ludoia Logo" 
+              width={36} 
+              height={36} 
+              className="h-9 w-auto object-contain"
+            />
+          ) : (
+            <div className="h-9 w-9 bg-slate-200 dark:bg-slate-800 animate-pulse rounded-xl" />
+          )}
           <div className="flex flex-col leading-tight hidden sm:flex">
             <span className="text-base font-semibold tracking-tight text-slate-900 dark:text-white">Ludoia</span>
             <span className="text-[10px] uppercase tracking-widest text-slate-500 dark:text-slate-400">Global Engineering</span>
