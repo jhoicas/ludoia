@@ -21,7 +21,6 @@ type EstimateResult = {
 export function QuoteModule() {
   const { t } = useTranslation();
   const [description, setDescription] = useState("");
-  const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState("");
   const [estimate, setEstimate] = useState<EstimateResult | null>(null);
@@ -36,7 +35,7 @@ export function QuoteModule() {
       const res = await fetch("/api/quote", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, projectDescription: description }),
+        body: JSON.stringify({ projectDescription: description }),
       });
       
       if (res.status === 429) {
@@ -78,18 +77,6 @@ export function QuoteModule() {
                   onChange={(e) => setDescription(e.target.value)}
                   placeholder={t("quote.placeholder")}
                   className="w-full rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 py-3 px-4 text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">Work Email</label>
-                <input
-                  type="email"
-                  required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="name@company.com"
-                  className="w-full rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 py-3 px-4 text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                 />
               </div>
 

@@ -50,11 +50,9 @@ describe('QuoteModule Component', () => {
   it('should submit and display AI estimation', async () => {
     render(<QuoteModule />);
     const textarea = screen.getByPlaceholderText('quote.placeholder');
-    const emailInput = screen.getByPlaceholderText('name@company.com');
     const button = screen.getByRole('button', { name: /quote.button/i });
     
     fireEvent.change(textarea, { target: { value: 'This is a valid long description for the AI to parse.' } });
-    fireEvent.change(emailInput, { target: { value: 'test@ludoia.com' } });
     
     expect(button).not.toBeDisabled();
     

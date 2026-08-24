@@ -17,7 +17,6 @@ jest.mock('@anthropic-ai/sdk', () => {
 describe('Quote API Schema (AI Textarea)', () => {
   it('should validate correct input', () => {
     const valid = {
-      email: 'test@example.com',
       projectDescription: 'Necesito un CRM avanzado para gestión hospitalaria.'
     };
     const result = QuoteRequestSchema.safeParse(valid);
@@ -26,7 +25,6 @@ describe('Quote API Schema (AI Textarea)', () => {
 
   it('should reject short descriptions', () => {
     const invalid = {
-      email: 'test@example.com',
       projectDescription: 'CRM'
     };
     const result = QuoteRequestSchema.safeParse(invalid);
@@ -35,17 +33,11 @@ describe('Quote API Schema (AI Textarea)', () => {
 
   it('should sanitize HTML from description', () => {
     const malicious = {
-      email: 'test@example.com',
       projectDescription: 'Necesito un CRM <script>alert(1)</script> muy bueno.'
     };
     const result = QuoteRequestSchema.safeParse(malicious);
     expect(result.success).toBe(true);
     expect(result.data?.projectDescription).toBe('Necesito un CRM alert(1) muy bueno.');
-  });
-  
-  it('should reject dangerous characters in email', () => {
-    const result = QuoteRequestSchema.safeParse({ email: 'test<script>@example.com', projectDescription: 'Largo y valido' });
-    expect(result.success).toBe(false);
   });
 });
 
@@ -55,7 +47,7 @@ describe('Quote API Endpoint', () => {
     mockIpCounter++;
     const req = {
       headers: { get: () => 'ip-quote-' + mockIpCounter },
-      json: async () => ({ email: 'test@example.com', projectDescription: 'Quiero una aplicación tipo Uber pero para drones de entrega en la ciudad.' })
+      json: async () => ({ projectDescription: 'Quiero una aplicación tipo Uber pero para drones de entrega en la ciudad.' })
     } as any;
 
     const res = await POST(req);
