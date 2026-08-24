@@ -40,13 +40,14 @@ export function TechStack() {
     {
       title: t("tech.cat.data"),
       icon: <Database className="h-6 w-6 text-orange-500" />,
+      items: [
         { name: "PostgreSQL", src: "/icons/tech/postgresql.svg" },
         { name: "SQL Server", src: "/icons/tech/sql-server.svg" },
         { name: "MongoDB", src: "/icons/tech/mongodb.svg" },
         { name: "Azure Cosmos DB", icon: <Database className="w-5 h-5 text-blue-500" /> },
         { name: "IBM DB2", src: "/icons/tech/ibm-db2.svg" },
         { name: "Redis", src: "/icons/tech/redis.svg" },
-        { name: "OpenAI", icon: <BrainCircuit className="w-5 h-5 text-emerald-600 dark:text-emerald-400" /> },
+        { name: "OpenAI", src: "/icons/tech/openai.svg" },
         { name: "Claude", src: "/icons/tech/claude.svg" },
         { name: "Cursor", src: "/icons/tech/cursor.svg" }
       ]
