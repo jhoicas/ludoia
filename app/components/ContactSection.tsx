@@ -57,7 +57,7 @@ export function ContactSection() {
                 </p>
                 <p className="flex items-center gap-2">
                   <PhoneCall className="h-4 w-4 text-blue-600" />
-                  <span>+57 (318) 383 84 17</span>
+                  <span>+57 (322) 552 59 98</span>
                 </p>
                 <p>
                   Atendemos empresas B2B que buscan centralizar{" "}
